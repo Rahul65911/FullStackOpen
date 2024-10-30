@@ -2,19 +2,12 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 require('dotenv').config();
+
 const app = express();
 
+app.use(express.static());
 app.use(express.json());
 app.use(cors());
-app.options('*',cors());
-var allowCrossDomain = (req,res,next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();  
-}
-app.use(allowCrossDomain);
-
 
 morgan.token('body', (req, res) => {
     return JSON.stringify(req.body);
